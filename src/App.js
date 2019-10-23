@@ -1,18 +1,31 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import store from './redux/store';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+// redux
+import { connect } from 'react-redux';
+import { getTickets } from './redux/dataActions';
 
 // components
 import PageWrapper from './components/PageWrapper';
 import Header from './components/Header';
 
-const App = () => (
-  <Provider store={store}>
+const App = ({ getTickets }) => {
+  useEffect(() => { getTickets(); }, []);
+
+  return (
     <div className="App">
       <Header />
       <PageWrapper />
     </div>
-  </Provider>
-);
+  );
+};
 
-export default App;
+App.propTypes = {
+  getTickets: PropTypes.func.isRequired,
+};
+
+const mapActionsToProps = {
+  getTickets,
+};
+
+export default connect(null, mapActionsToProps)(App);
