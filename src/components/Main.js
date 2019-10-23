@@ -1,10 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
-// redux
-import { connect } from 'react-redux';
-import { getTickets } from '../redux/dataActions';
 
 // components
 import TicketsList from './TicketsList';
@@ -16,23 +11,11 @@ const StyledMain = styled.main`
   flex-grow: 1;
 `;
 
-const Main = ({ getTickets }) => {
-  useEffect(() => { getTickets(); }, []);
+const Main = () => (
+  <StyledMain>
+    <Sort />
+    <TicketsList />
+  </StyledMain>
+);
 
-  return (
-    <StyledMain>
-      <Sort />
-      <TicketsList />
-    </StyledMain>
-  );
-};
-
-Main.propTypes = {
-  getTickets: PropTypes.func.isRequired,
-};
-
-const mapActionsToProps = {
-  getTickets,
-};
-
-export default connect(null, mapActionsToProps)(Main);
+export default (Main);

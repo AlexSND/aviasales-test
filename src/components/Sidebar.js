@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // components
@@ -21,34 +21,25 @@ const Wrapper = styled.form`
   }
 `;
 
-const Sidebar = () => {
-  const [check, setChek] = useState(false);
-
-  onchange = (event) => {
-    setChek(event.target.checked);
-  };
-
-  return (
-    <Wrapper>
-      <h4>Количество пересадок</h4>
-      <Checkbox checked={check} onChange={onchange}>
-        Все
-      </Checkbox>
-
-      {/* <Checkbox name="no-transfer">
-        Без пересадок
-      </Checkbox>
-      <Checkbox name="one-transfer">
-        1 пересадка
-      </Checkbox>
-      <Checkbox name="two-transfer">
-        2 пересадки
-      </Checkbox>
-      <Checkbox name="three-transfer">
-        3 пересадки
-      </Checkbox> */}
-    </Wrapper>
-  );
-};
+const Sidebar = () => (
+  <Wrapper>
+    <h4>Количество пересадок</h4>
+    <Checkbox>
+      Все
+    </Checkbox>
+    <Checkbox>
+      Без пересадок
+    </Checkbox>
+    <Checkbox>
+      1 пересадка
+    </Checkbox>
+    <Checkbox>
+      2 пересадки
+    </Checkbox>
+    <Checkbox>
+      3 пересадки
+    </Checkbox>
+  </Wrapper>
+);
 
 export default Sidebar;

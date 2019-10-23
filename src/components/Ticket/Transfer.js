@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import formatFlightTime from '../../utils/formatFlightTime';
 import formatFlightPeriod from '../../utils/formatFlightPeriod';
+import wordEnding from '../../utils/wordEnding';
 
 // styles
 const StyledTransfer = styled.div`
@@ -19,6 +20,7 @@ const Title = styled.div`
   font-weight: 600;
   font-size: 12px;
   color: #A0B0B9;
+  text-transform: uppercase;
 `;
 
 const Body = styled.div`
@@ -38,8 +40,8 @@ const Transfer = ({
   const way = `${origin} - ${destination}`;
   const flightTime = formatFlightTime(duration);
   const flightPeriod = formatFlightPeriod(date, duration);
-  const stopsLength = `${stops.length} пересадки`;
-  const stopsList = stops.map(item => <span>{item} </span>);
+  const stopsLength = wordEnding(stops.length, ['пересадка', 'пересадки', 'пересадок']);
+  const stopsList = stops.length > 0 && stops.join(', ');
   return (
     <StyledTransfer>
       <Segment>
@@ -72,10 +74,13 @@ const Transfer = ({
 
 Transfer.propTypes = {
   data: PropTypes.shape({
-    date: PropTypes.instanceOf(Date),
+    date: PropTypes.string.isRequired,
     origin: PropTypes.string,
     destination: PropTypes.string,
     duration: PropTypes.number,
+    stops: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ),
   }).isRequired,
 };
 

@@ -10,7 +10,8 @@ import Ticket from './Ticket/Ticket';
 
 const TicketsList = ({ tickets }) => {
   const ticketsList = tickets
-    ? tickets.map((ticket) => (<Ticket key={uuidv1()} price={ticket.price} carrier={ticket.carrier} forward={ticket.segments[0]} backward={ticket.segments[1]} />)) : <p>Loading...</p>;
+    ? tickets.map((ticket) => <Ticket key={uuidv1()} ticket={ticket} />)
+    : <p>Loading...</p>;
 
   return (
     <section>
@@ -20,16 +21,9 @@ const TicketsList = ({ tickets }) => {
 };
 
 TicketsList.propTypes = {
-  // tickets: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     price: PropTypes.number.isRequired,
-  //     name: PropTypes.string.isRequired,
-  //   }),
-  // ).isRequired,
-  tickets: PropTypes.shape({
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+  tickets: PropTypes.arrayOf(
+    PropTypes.object.isRequired,
+  ).isRequired,
 };
 
 const mapStateToProps = (store) => ({

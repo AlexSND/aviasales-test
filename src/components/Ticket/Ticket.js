@@ -28,27 +28,25 @@ const StyledHeader = styled.header`
   margin-bottom: 22px;
 `;
 
-const Ticket = ({
-  price,
-  carrier,
-  forward,
-  backward,
-}) => (
+const Ticket = ({ ticket: { price, carrier, segments } }) => (
   <Wrapper>
     <StyledHeader>
       <Price price={price} />
       <CarrierLogo carrier={carrier} />
     </StyledHeader>
-    <Transfer data={forward} />
-    <Transfer data={backward} />
+    <Transfer data={segments[0]} />
+    <Transfer data={segments[1]} />
   </Wrapper>
 );
 
 Ticket.propTypes = {
-  price: PropTypes.number.isRequired,
-  carrier: PropTypes.string.isRequired,
-  forward: PropTypes.instanceOf(Object).isRequired,
-  backward: PropTypes.instanceOf(Object).isRequired,
+  ticket: PropTypes.shape({
+    price: PropTypes.number.isRequired,
+    carrier: PropTypes.string.isRequired,
+    segments: PropTypes.arrayOf(
+      PropTypes.instanceOf(Object),
+    ),
+  }).isRequired,
 };
 
 export default Ticket;

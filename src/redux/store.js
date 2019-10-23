@@ -4,8 +4,17 @@ import reducer from './dataReducer';
 
 
 const initialState = {
-  searchId: null,
+  filter: {
+    oneStop: false,
+    twoStops: false,
+    threeStops: false,
+  },
+  sort: {
+    price: false,
+    duration: false,
+  },
   tickets: [],
+  displayedTickets: [],
 };
 
 const store = createStore(reducer, initialState, compose(
