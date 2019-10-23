@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 // redux
 import { connect } from 'react-redux';
-import { sortByPrice } from '../redux/dataActions';
+import { sortByPrice, sortByDuration } from '../redux/dataActions';
 
 // styles
 const Wrapper = styled.div`
@@ -21,9 +22,10 @@ const SortItem = styled.div`
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
-  background: #FFFFFF;
-  border: 1px solid #DFE5EC;
-  transition: 0.2s;
+  background: ${(props) => (props.active ? '#2196F3' : '#FFFFFF')};
+  color: ${(props) => (props.active && '#FFFFFF')};
+  border: 1px solid ${(props) => (props.active ? '#2196F3' : '#DFE5EC')};
+  transition: 0.1s;
 
   &:hover {
     cursor: pointer;
@@ -47,19 +49,37 @@ const SortItem = styled.div`
   }
 `;
 
-const Sort = ({ sortByPrice }) => (
+const Sort = ({
+  sortByPrice,
+  sortByDuration,
+  sortedByPrice,
+  sortedByDuration,
+}) => (
   <Wrapper>
-    <SortItem onClick={() => sortByPrice()}>
+    <SortItem active={sortedByPrice} onClick={() => sortByPrice()}>
       Самый дешевый
     </SortItem>
-    <SortItem>
+    <SortItem active={sortedByDuration} onClick={() => sortByDuration()}>
       Самый быстрый
     </SortItem>
   </Wrapper>
 );
 
-const mapActionsToProps = (dispatch) => ({
-  sortByPrice: () => dispatch(sortByPrice),
+Sort.propTypes = {
+  sortByPrice: PropTypes.func.isRequired,
+  sortByDuration: PropTypes.func.isRequired,
+  sortedByPrice: PropTypes.bool.isRequired,
+  sortedByDuration: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  sortedByPrice: state.sort.price,
+  sortedByDuration: state.sort.duration,
 });
 
-export default connect(null, mapActionsToProps)(Sort);
+const mapActionsToProps = (dispatch) => ({
+  sortByPrice: () => dispatch(sortByPrice),
+  sortByDuration: () => dispatch(sortByDuration),
+});
+
+export default connect(mapStateToProps, mapActionsToProps)(Sort);
