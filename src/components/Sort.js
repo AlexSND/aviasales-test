@@ -56,10 +56,10 @@ const Sort = ({
   sortedByDuration,
 }) => (
   <Wrapper>
-    <SortItem active={sortedByPrice} onClick={() => sortByPrice()}>
+    <SortItem active={sortedByPrice} onClick={sortByPrice}>
       Самый дешевый
     </SortItem>
-    <SortItem active={sortedByDuration} onClick={() => sortByDuration()}>
+    <SortItem active={sortedByDuration} onClick={sortByDuration}>
       Самый быстрый
     </SortItem>
   </Wrapper>
@@ -77,9 +77,9 @@ const mapStateToProps = (state) => ({
   sortedByDuration: state.sort.duration,
 });
 
-const mapActionsToProps = (dispatch) => ({
-  sortByPrice: () => dispatch(sortByPrice),
-  sortByDuration: () => dispatch(sortByDuration),
+const mapActionsToProps = ({
+  sortByPrice,
+  sortByDuration,
 });
 
 export default connect(mapStateToProps, mapActionsToProps)(Sort);

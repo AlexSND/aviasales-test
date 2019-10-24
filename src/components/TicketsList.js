@@ -4,6 +4,7 @@ import uuidv1 from 'uuid/v1';
 
 // redux
 import { connect } from 'react-redux';
+import getDisplayedTickets from '../redux/selectors';
 
 // components
 import Ticket from './Ticket/Ticket';
@@ -26,8 +27,8 @@ TicketsList.propTypes = {
   ).isRequired,
 };
 
-const mapStateToProps = (store) => ({
-  tickets: store.tickets,
+const mapStateToProps = (state) => ({
+  tickets: getDisplayedTickets(state),
 });
 
 export default connect(mapStateToProps)(TicketsList);

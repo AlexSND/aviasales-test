@@ -14,7 +14,6 @@ const initialState = {
     duration: false,
   },
   tickets: [],
-  displayedTickets: [],
 };
 
 const store = createStore(reducer, initialState, compose(

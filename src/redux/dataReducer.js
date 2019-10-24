@@ -10,46 +10,21 @@ export default (state, action) => {
       };
     }
     case SORT_BY_PRICE: {
-      const sortedTickets = [...state.tickets];
-      sortedTickets.sort((a, b) => a.price - b.price);
-
       return {
         ...state,
         sort: {
           price: true,
           duration: false,
         },
-        tickets: sortedTickets,
       };
     }
     case SORT_BY_DURATION: {
-      const sortedTickets = [...state.tickets];
-      sortedTickets.sort((a, b) => {
-        const aDuration = () => {
-          let aTotalDuration = 0;
-          a.segments.forEach((item) => {
-            aTotalDuration += item.duration;
-          });
-          return aTotalDuration;
-        };
-        const bDuration = () => {
-          let bTotalDuration = 0;
-          b.segments.forEach((item) => {
-            bTotalDuration += item.duration;
-          });
-          return bTotalDuration;
-        };
-
-        return aDuration() - bDuration();
-      });
-
       return {
         ...state,
         sort: {
           price: false,
           duration: true,
         },
-        tickets: sortedTickets,
       };
     }
     default:

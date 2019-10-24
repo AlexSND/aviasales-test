@@ -22,11 +22,11 @@ const getTickets = () => (
   }
 );
 
-const sortByPrice = (dispatch) => dispatch({
+const sortByPrice = () => (dispatch) => dispatch({
   type: SORT_BY_PRICE,
 });
 
-const sortByDuration = (dispatch) => dispatch({
+const sortByDuration = () => (dispatch) => dispatch({
   type: SORT_BY_DURATION,
 });
 
