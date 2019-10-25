@@ -29,6 +29,12 @@ const Wrapper = styled.form`
 const Sidebar = ({ setStopsFilter }) => {
   const [filters, setFilters] = useState([
     {
+      name: 'reset',
+      text: 'Все',
+      value: 'reset',
+      isChecked: false,
+    },
+    {
       name: 'without-stops',
       text: 'Без пересадок',
       value: '0',
@@ -55,17 +61,38 @@ const Sidebar = ({ setStopsFilter }) => {
   ]);
 
   const handleChange = (e) => {
-    const updatedFilters = [...filters].forEach((filter) => {
-      if (filter.name === e.target.name) {
-        // eslint-disable-next-line no-param-reassign
-        filter.isChecked = e.target.checked;
-      }
-    });
+    let updatedFilters;
+
+    if (e.target.name === 'reset') {
+      updatedFilters = [...filters].map((filter) => {
+        if (filter.name === 'reset') {
+          // eslint-disable-next-line no-param-reassign
+          filter.isChecked = true;
+        } else {
+          // eslint-disable-next-line no-param-reassign
+          filter.isChecked = false;
+        }
+        return filter;
+      });
+    } else {
+      updatedFilters = [...filters].map((filter) => {
+        if (filter.name === 'reset') {
+          // eslint-disable-next-line no-param-reassign
+          filter.isChecked = false;
+        }
+        if (filter.name === e.target.name) {
+          // eslint-disable-next-line no-param-reassign
+          filter.isChecked = e.target.checked;
+        }
+        return filter;
+      });
+    }
+
     setFilters(updatedFilters);
 
     const filterValues = [];
     filters.forEach((filter) => {
-      if (filter.isChecked === true) {
+      if (filter.isChecked === true && filter.name !== 'reset') {
         filterValues.push(filter.value);
       }
     });
@@ -78,7 +105,8 @@ const Sidebar = ({ setStopsFilter }) => {
         key={filter.value}
         name={filter.name}
         value={filter.value}
-        onChange={handleChange}
+        checked={filter.isChecked}
+        handleChange={handleChange}
       >
         {filter.text}
       </Checkbox>
