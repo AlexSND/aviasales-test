@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import formatFlightTime from '../../utils/formatFlightTime';
 import formatFlightPeriod from '../../utils/formatFlightPeriod';
 import wordEnding from '../../utils/wordEnding';
@@ -73,13 +73,13 @@ const Transfer = ({
 };
 
 Transfer.propTypes = {
-  data: PropTypes.shape({
-    date: PropTypes.string.isRequired,
-    origin: PropTypes.string,
-    destination: PropTypes.string,
-    duration: PropTypes.number,
-    stops: PropTypes.arrayOf(
-      PropTypes.string.isRequired,
+  data: propTypes.shape({
+    date: propTypes.string.isRequired,
+    origin: propTypes.string,
+    destination: propTypes.string,
+    duration: propTypes.number,
+    stops: propTypes.arrayOf(
+      propTypes.string.isRequired,
     ),
   }).isRequired,
 };

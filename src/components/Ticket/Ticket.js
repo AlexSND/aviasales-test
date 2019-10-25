@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // components
 import CarrierLogo from './CarrierLogo';
@@ -40,11 +40,11 @@ const Ticket = ({ ticket: { price, carrier, segments } }) => (
 );
 
 Ticket.propTypes = {
-  ticket: PropTypes.shape({
-    price: PropTypes.number.isRequired,
-    carrier: PropTypes.string.isRequired,
-    segments: PropTypes.arrayOf(
-      PropTypes.instanceOf(Object),
+  ticket: propTypes.shape({
+    price: propTypes.number.isRequired,
+    carrier: propTypes.string.isRequired,
+    segments: propTypes.arrayOf(
+      propTypes.instanceOf(Object),
     ),
   }).isRequired,
 };

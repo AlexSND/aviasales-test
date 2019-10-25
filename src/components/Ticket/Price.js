@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // styles
 const StyledPrice = styled.div`
@@ -20,7 +20,7 @@ const Price = ({ price }) => {
 };
 
 Price.propTypes = {
-  price: PropTypes.number.isRequired,
+  price: propTypes.number.isRequired,
 };
 
 export default Price;

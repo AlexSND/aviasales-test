@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import uuidv1 from 'uuid/v1';
 
 // redux
@@ -22,8 +22,8 @@ const TicketsList = ({ tickets }) => {
 };
 
 TicketsList.propTypes = {
-  tickets: PropTypes.arrayOf(
-    PropTypes.object.isRequired,
+  tickets: propTypes.arrayOf(
+    propTypes.object.isRequired,
   ).isRequired,
 };
 

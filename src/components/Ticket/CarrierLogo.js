@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // styles
 const Wrapper = styled.div`
@@ -22,7 +22,7 @@ const CarrierLogo = ({ carrier }) => (
 );
 
 CarrierLogo.propTypes = {
-  carrier: PropTypes.string.isRequired,
+  carrier: propTypes.string.isRequired,
 };
 
 export default (CarrierLogo);

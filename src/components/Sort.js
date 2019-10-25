@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 // redux
 import { connect } from 'react-redux';
@@ -66,10 +66,10 @@ const Sort = ({
 );
 
 Sort.propTypes = {
-  sortByPrice: PropTypes.func.isRequired,
-  sortByDuration: PropTypes.func.isRequired,
-  sortedByPrice: PropTypes.bool.isRequired,
-  sortedByDuration: PropTypes.bool.isRequired,
+  sortByPrice: propTypes.func.isRequired,
+  sortByDuration: propTypes.func.isRequired,
+  sortedByPrice: propTypes.bool.isRequired,
+  sortedByDuration: propTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
