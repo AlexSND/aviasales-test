@@ -76,9 +76,14 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   }
 `;
 
-const Checkbox = ({ children }) => (
+const Checkbox = ({
+  name,
+  value,
+  onChange,
+  children,
+}) => (
   <CheckboxContainer>
-    <HiddenCheckbox />
+    <HiddenCheckbox name={name} value={value} onChange={onChange} />
     <StyledCheckbox>
       {children}
     </StyledCheckbox>
@@ -86,9 +91,10 @@ const Checkbox = ({ children }) => (
 );
 
 Checkbox.propTypes = {
+  name: propTypes.string.isRequired,
+  value: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
   children: propTypes.string.isRequired,
-  // checked: propTypes.bool,
-  // onChange: propTypes.func.isRequired,
 };
 
 export default Checkbox;

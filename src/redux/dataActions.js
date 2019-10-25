@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { SET_TICKETS, SORT_BY_PRICE, SORT_BY_DURATION } from './types';
+import {
+  SET_TICKETS,
+  SORT_BY_PRICE,
+  SORT_BY_DURATION,
+  SET_STOPS_FILTER,
+} from './types';
 
 const getTickets = () => (
   (dispatch) => {
@@ -30,4 +35,14 @@ const sortByDuration = () => (dispatch) => dispatch({
   type: SORT_BY_DURATION,
 });
 
-export { getTickets, sortByPrice, sortByDuration };
+const setStopsFilter = (filterValues) => (dispatch) => dispatch({
+  type: SET_STOPS_FILTER,
+  payload: filterValues,
+});
+
+export {
+  getTickets,
+  sortByPrice,
+  sortByDuration,
+  setStopsFilter,
+};

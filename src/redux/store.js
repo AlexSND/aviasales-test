@@ -4,10 +4,8 @@ import reducer from './dataReducer';
 
 
 const initialState = {
-  filter: {
-    oneStop: false,
-    twoStops: false,
-    threeStops: false,
+  filters: {
+    stops: [],
   },
   sort: {
     price: false,

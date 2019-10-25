@@ -1,4 +1,9 @@
-import { SET_TICKETS, SORT_BY_PRICE, SORT_BY_DURATION } from './types';
+import {
+  SET_TICKETS,
+  SORT_BY_PRICE,
+  SORT_BY_DURATION,
+  SET_STOPS_FILTER,
+} from './types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -24,6 +29,15 @@ export default (state, action) => {
         sort: {
           price: false,
           duration: true,
+        },
+      };
+    }
+    case SET_STOPS_FILTER: {
+      const stops = action.payload.map((item) => +item);
+      return {
+        ...state,
+        filters: {
+          stops,
         },
       };
     }

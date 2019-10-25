@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
+
+// redux
+import { connect } from 'react-redux';
+import { setStopsFilter } from '../redux/dataActions';
 
 // components
 import Checkbox from './UI/Checkbox';
@@ -21,25 +26,79 @@ const Wrapper = styled.form`
   }
 `;
 
-const Sidebar = () => (
-  <Wrapper>
-    <h4>Количество пересадок</h4>
-    <Checkbox>
-      Все
-    </Checkbox>
-    <Checkbox>
-      Без пересадок
-    </Checkbox>
-    <Checkbox>
-      1 пересадка
-    </Checkbox>
-    <Checkbox>
-      2 пересадки
-    </Checkbox>
-    <Checkbox>
-      3 пересадки
-    </Checkbox>
-  </Wrapper>
-);
+const Sidebar = ({ setStopsFilter }) => {
+  const [filters, setFilters] = useState([
+    {
+      name: 'without-stops',
+      text: 'Без пересадок',
+      value: '0',
+      isChecked: false,
+    },
+    {
+      name: 'one-stop',
+      text: '1 пересадка',
+      value: '1',
+      isChecked: false,
+    },
+    {
+      name: 'two-stops',
+      text: '2 пересадки',
+      value: '2',
+      isChecked: false,
+    },
+    {
+      name: 'three-stops',
+      text: '3 пересадки',
+      value: '3',
+      isChecked: false,
+    },
+  ]);
 
-export default Sidebar;
+  const handleChange = (e) => {
+    const updatedFilters = [...filters].forEach((filter) => {
+      if (filter.name === e.target.name) {
+        // eslint-disable-next-line no-param-reassign
+        filter.isChecked = e.target.checked;
+      }
+    });
+    setFilters(updatedFilters);
+
+    const filterValues = [];
+    filters.forEach((filter) => {
+      if (filter.isChecked === true) {
+        filterValues.push(filter.value);
+      }
+    });
+    setStopsFilter(filterValues);
+  };
+
+  const checkboxes = filters.map(
+    (filter) => (
+      <Checkbox
+        key={filter.value}
+        name={filter.name}
+        value={filter.value}
+        onChange={handleChange}
+      >
+        {filter.text}
+      </Checkbox>
+    ),
+  );
+
+  return (
+    <Wrapper>
+      <h4>Количество пересадок</h4>
+      {checkboxes}
+    </Wrapper>
+  );
+};
+
+Sidebar.propTypes = {
+  setStopsFilter: propTypes.func.isRequired,
+};
+
+const mapActionsToProps = ({
+  setStopsFilter,
+});
+
+export default connect(null, mapActionsToProps)(Sidebar);
