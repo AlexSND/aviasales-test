@@ -74,6 +74,10 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
       opacity: 1;
     }
   }
+
+  &:focus + ${StyledCheckbox}:before {
+    box-shadow: 0 0 3px 2px rgba(33, 150, 243, 0.5);
+  }
 `;
 
 const Checkbox = ({
